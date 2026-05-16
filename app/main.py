@@ -5,6 +5,9 @@ def main():
     # TODO: Uncomment the code below to pass the first stage
     sys.stdout.write("$ ")
 
+    input = sys.stdin.readline().strip()
+    sys.stdout.write(f"{input}: command not found\n")
+
 
 if __name__ == "__main__":
     main()
