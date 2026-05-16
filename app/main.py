@@ -7,7 +7,10 @@ def main():
     while True:
         sys.stdout.write("$ ")
         input = sys.stdin.readline().strip()
+        if input == "exit":
+            break
         sys.stdout.write(f"{input}: command not found\n")
+
 
 
 if __name__ == "__main__":
