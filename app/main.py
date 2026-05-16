@@ -9,10 +9,9 @@ def main():
         input = sys.stdin.readline().strip()
         if input == "exit":
             break
-        if sys.argv[1] == "echo":
-            for arg in sys.argv[2:]:
-                sys.stdout.write(arg + " ")
-            sys.stdout.write("\n")
+        input_list = input.split()
+        if input_list[0] == "echo":
+            sys.stdout.write(" ".join(input_list[1:]) + "\n")
         else:
             sys.stdout.write(f"{input}: command not found\n")
 
