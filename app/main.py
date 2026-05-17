@@ -30,7 +30,8 @@ def main():
                                 sys.stdout.write(f"{input_list[1]} is {file_path.absolute()}\n")
                                 break
                 ## we are here if we have checked all directories and not found the command
-                sys.stdout.write(f"{input_list[1]} not found\n")
+                else:
+                    sys.stdout.write(f"{input_list[1]} not found\n")
                 
             continue
 
