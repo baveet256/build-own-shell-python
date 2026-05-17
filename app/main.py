@@ -23,12 +23,11 @@ def main():
                 sys.stdout.write(f"{input_list[1]} is a shell builtin\n")
             else:
                 for dir in sys.path:
-
                     file_path = Path(f"{dir}/{input_list[1]}")
                     if file_path.is_file():
                         ## file exists, check if its executable 
                         if os.access(file_path, os.X_OK):
-                                sys.stdout.write(f"{input_list[1]} is {file_path    }\n")
+                                sys.stdout.write(f"{input_list[1]} is {file_path.resolve()}\n")
                                 break
                         else:
                             ## file exists but is not executable
