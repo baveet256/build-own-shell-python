@@ -29,9 +29,6 @@ def main():
                         if os.access(file_path, os.X_OK):
                                 sys.stdout.write(f"{input_list[1]} is {file_path.resolve()}\n")
                                 break
-                        else:
-                            ## file exists but is not executable
-                            continue
                 ## we are here if we have checked all directories and not found the command
                 sys.stdout.write(f"{input_list[1]} not found\n")
                 
