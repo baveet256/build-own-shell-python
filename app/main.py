@@ -22,7 +22,7 @@ def main():
             elif input_list[1] == "type":
                 sys.stdout.write(f"{input_list[1]} is a shell builtin\n")
             else:
-                for dir in os.environ.get('PATH', '').split(os.pathsep):
+                for dir in os.path.abspath():
                     file_path = Path(f"{dir}/{input_list[1]}")
                     if file_path.is_file():
                         ## file exists, check if its executable 
