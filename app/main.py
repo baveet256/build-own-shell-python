@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 import sys
 
 
@@ -22,20 +23,16 @@ def main():
                 sys.stdout.write(f"{input_list[1]} is a shell builtin\n")
             else:
                 for dir in sys.path:
-                    try:
-                        with open(f"{dir}/{input_list[1]}") as f:
-                            ## file exists 
-                            ## checking if its executable 
-                            if os.access(f"{dir}/{input_list[1]}", os.X_OK):
-                                sys.stdout.write(f"{input_list[1]} is {dir}/{input_list[1]}\n")
+
+                    file_path = Path(f"{dir}/{input_list[1]}")
+                    if file_path.is_file():
+                        ## file exists, check if its executable 
+                        if os.access(file_path, os.X_OK):
+                                sys.stdout.write(f"{input_list[1]} is {file_path    }\n")
                                 break
-                            else:
-                                ## file exists but is not executable
-                                continue
-                    except FileNotFoundError:
-                        ## file does not exist in this directory, check the next one
-                        continue
-                
+                        else:
+                            ## file exists but is not executable
+                            continue
                 ## we are here if we have checked all directories and not found the command
                 sys.stdout.write(f"{input_list[1]} not found\n")
                 
