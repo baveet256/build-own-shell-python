@@ -17,7 +17,8 @@ def main():
             
             elif input_list[1] == "exit":
                 sys.stdout.write(f"{input_list[1]} is a shell builtin\n")
-               
+            elif input_list[1] == "type":
+                sys.stdout.write(f"{input_list[1]} is a shell builtin\n")
             else:
                 sys.stdout.write(f"{input_list[1]} not found\n")
             continue
