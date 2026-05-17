@@ -22,12 +22,12 @@ def main():
             elif input_list[1] == "type":
                 sys.stdout.write(f"{input_list[1]} is a shell builtin\n")
             else:
-                for dir in os.path.abspath():
+                for dir in os.environ.get('PATH', '').split(os.pathsep):
                     file_path = Path(f"{dir}/{input_list[1]}")
                     if file_path.is_file():
                         ## file exists, check if its executable 
                         if os.access(file_path, os.X_OK):
-                                sys.stdout.write(f"{input_list[1]} is {file_path.resolve()}\n")
+                                sys.stdout.write(f"{input_list[1]} is {file_path.absolute()}\n")
                                 break
                 ## we are here if we have checked all directories and not found the command
                 sys.stdout.write(f"{input_list[1]} not found\n")
