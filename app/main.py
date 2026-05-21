@@ -34,7 +34,11 @@ def main():
                     sys.stdout.write(f"{input_list[1]} not found\n")
                 
             continue
-
+        
+        if input_list[0] == "pwd":
+            sys.stdout.write(os.getcwd() + "\n")
+            continue
+            
         if input_list[0] == "exit":
             sys.stdout.write("exit\n")
             break
