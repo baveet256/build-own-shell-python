@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 import sys
-import subprocess
+
 
 def main():
     # TODO: Uncomment the code below to pass the first stage
@@ -27,8 +27,7 @@ def main():
                     if file_path.is_file():
                         ## file exists, check if its executable 
                         if os.access(file_path, os.X_OK):
-                                ## file is executable, pass the args to the command
-                                subprocess.run(input_list, executable=str(file_path))
+                                sys.stdout.write(f"{input_list[1]} is {file_path.absolute()}\n")
                                 break
                 ## we are here if we have checked all directories and not found the command
                 else:
@@ -36,11 +35,23 @@ def main():
                 
             continue
 
+        if input_list[0] == "exit":
+            sys.stdout.write("exit\n")
+            break
+
         if input_list[0] == "echo":
             sys.stdout.write(" ".join(input_list[1:]) + "\n")
-        else:
-            sys.stdout.write(f"{input}: command not found\n")
+            continue
 
+        ## check if path exists and is executable
+        for dir in os.environ.get('PATH', '').split(os.pathsep):
+                file_path = Path(f"{dir}/{input_list[0]}")
+                if file_path.is_file() and os.access(file_path, os.X_OK):
+                    subprocess.run(input_list, executable=str(file_path))
+                    break
+            ## we are here if we have checked all directories and not found the command
+        else:
+            sys.stdout.write(f"{input_list[0]} not found\n")
 
 
 if __name__ == "__main__":
