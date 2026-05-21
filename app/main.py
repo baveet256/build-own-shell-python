@@ -46,7 +46,7 @@ def main():
         
         if input_list[0] == "cd":   
             if input_list[1] == "~":
-                os.chdir(os.environ.get('HOME'))
+                os.chdir(os.getenv('HOME'))
                 continue
 
            if input_list[1] == "..":
