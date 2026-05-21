@@ -14,13 +14,18 @@ def main():
         input_list = input.split()
 
         if input_list[0] == "type":
+            if input_list[1] == "pwd":
+                sys.stdout.write(f"{input_list[1]} is a shell builtin\n")
+                continue
+            if input_list[1] == "exit":
+                sys.stdout.write(f"{input_list[1]} is a shell builtin\n")
+                continue
+            if input_list[1] == "type":
+                sys.stdout.write(f"{input_list[1]} is a shell builtin\n")
+                continue
             if input_list[1] == "echo":
                 sys.stdout.write(f"{input_list[1]} is a shell builtin\n")
             
-            elif input_list[1] == "exit":
-                sys.stdout.write(f"{input_list[1]} is a shell builtin\n")
-            elif input_list[1] == "type":
-                sys.stdout.write(f"{input_list[1]} is a shell builtin\n")
             else:
                 for dir in os.environ.get('PATH', '').split(os.pathsep):
                     file_path = Path(f"{dir}/{input_list[1]}")
@@ -38,7 +43,7 @@ def main():
         if input_list[0] == "pwd":
             sys.stdout.write(os.getcwd() + "\n")
             continue
-            
+
         if input_list[0] == "exit":
             sys.stdout.write("exit\n")
             break
