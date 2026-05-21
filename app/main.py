@@ -51,7 +51,7 @@ def main():
                     break
             ## we are here if we have checked all directories and not found the command
         else:
-            sys.stdout.write(f"{input_list[0]} not found\n")
+            sys.stdout.write(f"{input_list[0]}: command not found\n")
 
 
 if __name__ == "__main__":
