@@ -43,6 +43,10 @@ def main():
         if input_list[0] == "pwd":
             sys.stdout.write(os.getcwd() + "\n")
             continue
+        
+        if input_list[0] == "cd":
+            os.chdir(input_list[1])
+            continue
 
         if input_list[0] == "exit":
             sys.stdout.write("exit\n")
