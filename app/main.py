@@ -44,7 +44,15 @@ def main():
             sys.stdout.write(os.getcwd() + "\n")
             continue
         
-        if input_list[0] == "cd":
+        if input_list[0] == "cd":   
+            if input_list[1] == "~":
+                os.chdir(os.environ.get('HOME'))
+                continue
+
+           if input_list[1] == "..":
+                os.chdir(os.path.dirname(os.getcwd()))
+                continue
+
             dir_path = Path(input_list[1])
             if dir_path.is_dir():
                 os.chdir(dir_path)
