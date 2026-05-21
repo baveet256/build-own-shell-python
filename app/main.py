@@ -45,7 +45,11 @@ def main():
             continue
         
         if input_list[0] == "cd":
-            os.chdir(input_list[1])
+            dir_path = Path(input_list[1])
+            if dir_path.is_dir():
+                os.chdir(dir_path)
+            else:
+                sys.stdout.write(f"{input_list[1]}: no such directory\n")    
             continue
 
         if input_list[0] == "exit":
