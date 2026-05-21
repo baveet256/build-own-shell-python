@@ -49,7 +49,7 @@ def main():
             if dir_path.is_dir():
                 os.chdir(dir_path)
             else:
-                sys.stdout.write(f"{input_list[1]}: no such directory\n")    
+                sys.stdout.write(f"cd: {input_list[1]}: No such file or directory\n")    
             continue
 
         if input_list[0] == "exit":
