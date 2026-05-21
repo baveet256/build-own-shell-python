@@ -27,7 +27,8 @@ def main():
                     if file_path.is_file():
                         ## file exists, check if its executable 
                         if os.access(file_path, os.X_OK):
-                                sys.stdout.write(f"{input_list[1]} is {file_path.absolute()}\n")
+                                ## file is executable, pass the args to the command
+                                subprocess.run(file_path, args=input_list[1:])
                                 break
                 ## we are here if we have checked all directories and not found the command
                 else:
