@@ -48,8 +48,7 @@ def main():
             if input_list[1] == "~":
                 os.chdir(os.getenv('HOME'))
                 continue
-
-           if input_list[1] == "..":
+            if input_list[1] == "..":
                 os.chdir(os.path.dirname(os.getcwd()))
                 continue
 
