@@ -63,27 +63,38 @@ def main():
             sys.stdout.write("exit\n")
             break
 
-        if input_list[0] == "echo":
-
-            full_part = " ".join(input_list[1:])
-
-            if full_part[0] == "'":
-
-                part = full_part
-                first_quote = part.find("'")
-                second_quote = part.find("'", first_quote + 1)
-                part = part[first_quote + 1:second_quote]
+        if input.startswith("echo "):
+            raw_args = input[5:]
+            
+            if raw_args[0] == "'":
+                part = raw_args.split("'")[1]
                 sys.stdout.write(part + "\n")
                 continue
-            if full_part[0] == '"':
-                part = full_part
-                first_quote = part.find('"')
-                second_quote = part.find('"', first_quote + 1)
-                part = part[first_quote + 1:second_quote]
+            if raw_args[0] == '"':
+                part = raw_args.split('"')[1]
                 sys.stdout.write(part + "\n")
                 continue
-           
-            sys.stdout.write(full_part + "\n")
+            
+            result = []
+            inside_quotes = False
+            
+            for i, char in enumerate(raw_args):
+                if char == "'":
+                    # Toggle whether we are inside or outside of quotes
+                    inside_quotes = not inside_quotes
+                elif char == " ":
+                    # If inside quotes, keep the space exactly as it is
+                    if inside_quotes:
+                        result.append(char)
+                    # If outside quotes, only add a space if the previous character wasn't a space
+                    elif result and result[-1] != " ":
+                        result.append(char)
+                else:
+                    # Keep regular characters
+                    result.append(char)
+                    
+            final_output = "".join(result).strip()
+            sys.stdout.write(final_output + "\n")
             continue
 
         ## check if path exists and is executable
