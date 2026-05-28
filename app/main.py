@@ -88,7 +88,17 @@ def main():
             sys.stdout.write(final_output + "\n")
             continue
 
-        ## check if path exists and is executable
+        if input_list[0] == "cat":
+            for file in input_list[1:]:
+                file_path = Path(file)
+                if file_path.is_file():
+                    with open(file_path, 'r') as file:
+                        sys.stdout.write(file.read() + "\n")
+                else:
+                    sys.stdout.write(f"cat: {file}: No such file or directory\n")
+            continue
+        ## check if path exists and is executable]
+        
         for dir in os.environ.get('PATH', '').split(os.pathsep):
                 file_path = Path(f"{dir}/{input_list[0]}")
                 if file_path.is_file() and os.access(file_path, os.X_OK):
