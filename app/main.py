@@ -12,7 +12,7 @@ def main():
         input = sys.stdin.readline().strip()
         if input == "exit":
             break
-        input_list = shlex.split(user_input)
+        input_list = shlex.split(input)
 
         if input_list[0] == "type":
             if input_list[1] == "pwd":
