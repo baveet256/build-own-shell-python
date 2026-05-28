@@ -66,15 +66,6 @@ def main():
         if input.startswith("echo "):
             raw_args = input[5:]
             
-            if raw_args[0] == "'":
-                part = raw_args.split("'")[1]
-                sys.stdout.write(part + "\n")
-                continue
-            if raw_args[0] == '"':
-                part = raw_args.split('"')[1]
-                sys.stdout.write(part + "\n")
-                continue
-            
             result = []
             inside_quotes = False
             
