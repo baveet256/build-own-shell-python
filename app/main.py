@@ -110,45 +110,6 @@ def main():
                 sys.stdout.write(final_output + "\n")
                 continue
 
-            for i, char in enumerate(raw_args):
-                if char == '"':
-                    # Toggle whether we are inside or outside of quotes
-                    inside_quotes = not inside_quotes
-                elif char == " ":
-                    # If inside quotes, keep the space exactly as it is
-                    if inside_quotes:
-                        result.append(char)
-                    # If outside quotes, only add a space if the previous character wasn't a space
-                    elif result and result[-1] != " ":
-                        result.append(char)
-                else:
-                    # Keep regular characters
-                    result.append(char)
-                    
-            final_output = "".join(result).strip()
-            sys.stdout.write(final_output + "\n")
-            continue
-
-            ## for single quotes 
-            for i, char in enumerate(raw_args):
-                if char == "'":
-                    # Toggle whether we are inside or outside of quotes
-                    inside_quotes = not inside_quotes
-                elif char == " ":
-                    # If inside quotes, keep the space exactly as it is
-                    if inside_quotes:
-                        result.append(char)
-                    # If outside quotes, only add a space if the previous character wasn't a space
-                    elif result and result[-1] != " ":
-                        result.append(char)
-                else:
-                    # Keep regular characters
-                    result.append(char)
-                    
-            final_output = "".join(result).strip()
-            sys.stdout.write(final_output + "\n")
-            continue
-
         if input_list[0] == "cat":
             for file in input_list[1:]:
                 file_path = Path(file)
