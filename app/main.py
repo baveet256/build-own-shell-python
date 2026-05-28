@@ -67,20 +67,20 @@ def main():
 
             if input_list[1][0] == "'":
 
-                part = input_list[1].split("'")
+                part = input_list[1]
+                first_quote = part.find("'")
+                second_quote = part.find("'", first_quote + 1)
+                part = part[first_quote + 1:second_quote]
                 sys.stdout.write(part + "\n")
                 continue
-
             if input_list[1][0] == '"':
-                part = input_list[1].split('"')
+                part = input_list[1]
+                first_quote = part.find('"')
+                second_quote = part.find('"', first_quote + 1)
+                part = part[first_quote + 1:second_quote]
                 sys.stdout.write(part + "\n")
                 continue
-
-            if input_list[1][0] == '`':
-                part = input_list[1].split('`')
-                sys.stdout.write(part + "\n")
-                continue
-
+           
             sys.stdout.write(" ".join(input_list[1:]) + "\n")
             continue
 
