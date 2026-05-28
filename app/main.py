@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 import sys
 import subprocess
+import shlex
 
 def main():
     # TODO: Uncomment the code below to pass the first stage
