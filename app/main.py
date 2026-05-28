@@ -86,9 +86,9 @@ def main():
                 else:
                     # Keep regular characters
                     result.append(char)
-            final_output = "".join(result).strip()
-            sys.stdout.write(final_output + "\n")
-            continue
+                final_output = "".join(result).strip()
+                sys.stdout.write(final_output + "\n")
+                continue
 
             if raw_args[0] == "'":
                 for i, char in enumerate(raw_args):
@@ -106,9 +106,9 @@ def main():
                     # Keep regular characters
                     result.append(char)
                     
-            final_output = "".join(result).strip()
-            sys.stdout.write(final_output + "\n")
-            continue
+                final_output = "".join(result).strip()
+                sys.stdout.write(final_output + "\n")
+                continue
 
             for i, char in enumerate(raw_args):
                 if char == '"':
