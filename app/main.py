@@ -65,23 +65,25 @@ def main():
 
         if input_list[0] == "echo":
 
-            if input_list[1][0] == "'":
+            full_part = " ".join(input_list[1:])
 
-                part = input_list[1]
+            if full_part[0] == "'":
+
+                part = full_part
                 first_quote = part.find("'")
                 second_quote = part.find("'", first_quote + 1)
                 part = part[first_quote + 1:second_quote]
                 sys.stdout.write(part + "\n")
                 continue
-            if input_list[1][0] == '"':
-                part = input_list[1]
+            if full_part[0] == '"':
+                part = full_part
                 first_quote = part.find('"')
                 second_quote = part.find('"', first_quote + 1)
                 part = part[first_quote + 1:second_quote]
                 sys.stdout.write(part + "\n")
                 continue
            
-            sys.stdout.write(" ".join(input_list[1:]) + "\n")
+            sys.stdout.write(full_part + "\n")
             continue
 
         ## check if path exists and is executable
