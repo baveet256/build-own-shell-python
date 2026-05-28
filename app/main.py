@@ -94,9 +94,10 @@ def main():
                 file_path = Path(file)
                 if file_path.is_file():
                     with open(file_path, 'r') as file:
-                        sys.stdout.write(file.read() + "\n")
+                        sys.stdout.write(file.read())
                 else:
                     sys.stdout.write(f"cat: {file}: No such file or directory\n")
+            sys.stdout.write("\n")
             continue
         ## check if path exists and is executable
         
