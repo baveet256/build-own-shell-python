@@ -11,6 +11,8 @@ def main():
         sys.stdout.write("$ ")
         sys.stdout.flush()
         input = sys.stdin.readline().strip()
+        if input == "":
+            continue
         if input == "exit":
             break
         input_list = shlex.split(input)
