@@ -68,6 +68,12 @@ def main():
             break
 
         if input_list[0] == "echo":
+
+            if ">" in input_list[1:]:
+                output_file = input_list[1:].split(">")[1]
+                with open(output_file, 'w') as file:
+                    file.write(" ".join(input_list[1:].split(">")[0]))
+                continue
             sys.stdout.write(" ".join(input_list[1:]) + "\n")
             continue
 
