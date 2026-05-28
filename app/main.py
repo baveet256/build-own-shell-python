@@ -9,6 +9,7 @@ def main():
 
     while True:
         sys.stdout.write("$ ")
+        sys.stdout.flush()
         input = sys.stdin.readline().strip()
         if input == "exit":
             break
@@ -98,6 +99,7 @@ def main():
                 else:
                     sys.stdout.write(f"cat: {file}: No such file or directory\n")
             sys.stdout.write("\n")
+            sys.stdout.flush()
             continue
         ## check if path exists and is executable
         
