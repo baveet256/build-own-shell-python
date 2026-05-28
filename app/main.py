@@ -11,7 +11,7 @@ def main():
         input = sys.stdin.readline().strip()
         if input == "exit":
             break
-        input_list = input.split()
+        input_list = shlex.split(user_input)
 
         if input_list[0] == "type":
             if input_list[1] == "pwd":
@@ -97,7 +97,7 @@ def main():
                 else:
                     sys.stdout.write(f"cat: {file}: No such file or directory\n")
             continue
-        ## check if path exists and is executable]
+        ## check if path exists and is executable
         
         for dir in os.environ.get('PATH', '').split(os.pathsep):
                 file_path = Path(f"{dir}/{input_list[0]}")
