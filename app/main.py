@@ -67,17 +67,17 @@ def main():
 
             if input_list[1][0] == "'":
 
-                part = input_list[1].split("'")[1]
+                part = input_list[1].split("'")
                 sys.stdout.write(part + "\n")
                 continue
 
             if input_list[1][0] == '"':
-                part = input_list[1].split('"')[1]
+                part = input_list[1].split('"')
                 sys.stdout.write(part + "\n")
                 continue
-                
+
             if input_list[1][0] == '`':
-                part = input_list[1].split('`')[1]
+                part = input_list[1].split('`')
                 sys.stdout.write(part + "\n")
                 continue
 
