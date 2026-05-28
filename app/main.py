@@ -64,6 +64,23 @@ def main():
             break
 
         if input_list[0] == "echo":
+
+            if input_list[1][0] == "'":
+
+                part = input_list[1].split("'")[1]
+                sys.stdout.write(part + "\n")
+                continue
+
+            if input_list[1][0] == '"':
+                part = input_list[1].split('"')[1]
+                sys.stdout.write(part + "\n")
+                continue
+                
+            if input_list[1][0] == '`':
+                part = input_list[1].split('`')[1]
+                sys.stdout.write(part + "\n")
+                continue
+
             sys.stdout.write(" ".join(input_list[1:]) + "\n")
             continue
 
