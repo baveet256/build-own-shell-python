@@ -98,7 +98,6 @@ def main():
                         sys.stdout.write(file.read())
                 else:
                     sys.stdout.write(f"cat: {file}: No such file or directory\n")
-            sys.stdout.write("\n")
             sys.stdout.flush()
             continue
         ## check if path exists and is executable
