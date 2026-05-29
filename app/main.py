@@ -68,21 +68,15 @@ def main():
             break
 
         if input_list[0] == "echo":
-
-            if ">" in input_list[1:]:
-                output_file = input_list[1:].split(">")[1]
-                ## also checking if output number is there
-                last_number = input_list[1:].split(">")[0][-1]
-                ## now we need to check if the output number is a valid number, if it is then ignore it, if it is not then print an error
-
-                ## to check if number is valid, split after echo and before >, count the number of words
-                if last_number.isdigit() and len(input_list[1:].split(">")[0].split()) == int(last_number):
-                    with open(output_file, 'w') as file:
-                        file.write(" ".join(input_list[1:].split(">")[0]))
+            if ">" in input_list:
+                redirect_idx = input_list.index(">")
+                if redirect_idx + 1 >= len(input_list):
+                    sys.stdout.write("echo: missing output file\n")
                     continue
-                else:
-                    sys.stdout.write(f"echo: {last_number}: Invalid output number\n")
-                    continue
+                output_file = input_list[redirect_idx + 1]
+                with open(output_file, "w") as file:
+                    file.write(" ".join(input_list[1:redirect_idx]) + "\n")
+                continue
             else:
                 sys.stdout.write(" ".join(input_list[1:]) + "\n")
                 continue
@@ -100,16 +94,16 @@ def main():
         ## check if path exists and is executable
 
         if input_list[0] == "ls":
-
-            if ">" in input_list[1:]:
-                output_file = input_list[1:].split(">")[1]
-                with open(output_file, 'w') as file:
-                    for dir in os.listdir(os.getcwd()):
-                        if os.path.isdir(dir):
-                            file.write(dir + "\n")
-                        else:
-                            file.write(dir + "\n")
+            if ">" in input_list:
+                redirect_idx = input_list.index(">")
+                if redirect_idx + 1 >= len(input_list):
+                    sys.stdout.write("ls: missing output file\n")
                     continue
+                output_file = input_list[redirect_idx + 1]
+                with open(output_file, "w") as file:
+                    for dir in os.listdir(os.getcwd()):
+                        file.write(dir + "\n")
+                continue
 
             else:
                 for dir in os.listdir(os.getcwd()):
