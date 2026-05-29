@@ -71,11 +71,21 @@ def main():
 
             if ">" in input_list[1:]:
                 output_file = input_list[1:].split(">")[1]
-                with open(output_file, 'w') as file:
-                    file.write(" ".join(input_list[1:].split(">")[0]))
+                ## also checking if output number is there
+                last_number = input_list[1:].split(">")[0][-1]
+                ## now we need to check if the output number is a valid number, if it is then ignore it, if it is not then print an error
+
+                ## to check if number is valid, split after echo and before >, count the number of words
+                if last_number.isdigit() and len(input_list[1:].split(">")[0].split()) == int(last_number):
+                    with open(output_file, 'w') as file:
+                        file.write(" ".join(input_list[1:].split(">")[0]))
+                    continue
+                else:
+                    sys.stdout.write(f"echo: {last_number}: Invalid output number\n")
+                    continue
+            else:
+                sys.stdout.write(" ".join(input_list[1:]) + "\n")
                 continue
-            sys.stdout.write(" ".join(input_list[1:]) + "\n")
-            continue
 
         if input_list[0] == "cat":
             for file in input_list[1:]:
@@ -88,6 +98,26 @@ def main():
             sys.stdout.flush()
             continue
         ## check if path exists and is executable
+
+        if input_list[0] == "ls":
+
+            if ">" in input_list[1:]:
+                output_file = input_list[1:].split(">")[1]
+                with open(output_file, 'w') as file:
+                    for dir in os.listdir(os.getcwd()):
+                        if os.path.isdir(dir):
+                            file.write(dir + "\n")
+                        else:
+                            file.write(dir + "\n")
+                    continue
+
+            else:
+                for dir in os.listdir(os.getcwd()):
+                    if os.path.isdir(dir):
+                        sys.stdout.write(dir + "\n")
+                    else:
+                        sys.stdout.write(dir + "\n")
+                continue
         
         for dir in os.environ.get('PATH', '').split(os.pathsep):
                 file_path = Path(f"{dir}/{input_list[0]}")
