@@ -100,17 +100,13 @@ def main():
                     sys.stdout.write("ls: missing output file\n")
                     continue
                 output_file = input_list[redirect_idx + 1]
+                ls_args = input_list[1:redirect_idx]
                 with open(output_file, "w") as file:
-                    for dir in os.listdir(os.getcwd()):
-                        file.write(dir + "\n")
+                    subprocess.run(["ls", *ls_args], stdout=file, text=True)
                 continue
 
             else:
-                for dir in os.listdir(os.getcwd()):
-                    if os.path.isdir(dir):
-                        sys.stdout.write(dir + "\n")
-                    else:
-                        sys.stdout.write(dir + "\n")
+                subprocess.run(["ls", *input_list[1:]], text=True)
                 continue
         
         for dir in os.environ.get('PATH', '').split(os.pathsep):
