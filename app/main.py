@@ -94,13 +94,24 @@ def main():
                 continue
 
         if input_list[0] == "cat":
-            for file in input_list[1:]:
-                file_path = Path(file)
-                if file_path.is_file():
-                    with open(file_path, 'r') as file:
-                        sys.stdout.write(file.read())
-                else:
-                    sys.stdout.write(f"cat: {file}: No such file or directory\n")
+            redirect_idx, output_file = parse_stdout_redirect(input_list[1:])
+            cat_args = input_list[1:] if redirect_idx is None else input_list[1:1 + redirect_idx]
+            if redirect_idx is not None and not output_file:
+                sys.stdout.write("cat: missing output file\n")
+                continue
+
+            out_handle = open(output_file, "w") if output_file else sys.stdout
+            try:
+                for file_name in cat_args:
+                    file_path = Path(file_name)
+                    if file_path.is_file():
+                        with open(file_path, "r") as source_file:
+                            out_handle.write(source_file.read())
+                    else:
+                        sys.stdout.write(f"cat: {file_name}: No such file or directory\n")
+            finally:
+                if out_handle is not sys.stdout:
+                    out_handle.close()
             sys.stdout.flush()
             continue
         ## check if path exists and is executable
