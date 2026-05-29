@@ -74,8 +74,9 @@ def main():
                     sys.stdout.write("echo: missing output file\n")
                     continue
                 output_file = input_list[redirect_idx + 1]
+                echo_args = input_list[1:redirect_idx]
                 with open(output_file, "w") as file:
-                    file.write(" ".join(input_list[1:redirect_idx]) + "\n")
+                    file.write(" ".join(echo_args) + "\n")
                 continue
             else:
                 sys.stdout.write(" ".join(input_list[1:]) + "\n")
