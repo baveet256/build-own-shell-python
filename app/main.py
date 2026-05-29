@@ -76,10 +76,10 @@ def main():
                 output_file = input_list[redirect_idx + 1]
                 echo_args = input_list[1:redirect_idx]
                 with open(output_file, "w") as file:
-                    file.write(" ".join(echo_args) + "\n")
+                    subprocess.run(["echo", *echo_args], stdout=file, text=True)    
                 continue
             else:
-                sys.stdout.write(" ".join(input_list[1:]) + "\n")
+                subprocess.run(["echo", *input_list[1:]], text=True)
                 continue
 
         if input_list[0] == "cat":
