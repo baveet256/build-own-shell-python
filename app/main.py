@@ -4,6 +4,18 @@ import sys
 import subprocess
 import shlex
 
+def parse_stdout_redirect(args):
+    for idx, token in enumerate(args):
+        if token in (">", "1>"):
+            if idx + 1 < len(args):
+                return idx, args[idx + 1]
+            return idx, None
+        if token.startswith("1>") and len(token) > 2:
+            return idx, token[2:]
+        if token.startswith(">") and len(token) > 1:
+            return idx, token[1:]
+    return None, None
+
 def main():
     # TODO: Uncomment the code below to pass the first stage
 
@@ -68,13 +80,12 @@ def main():
             break
 
         if input_list[0] == "echo":
-            if ">" in input_list:
-                redirect_idx = input_list.index(">")
-                if redirect_idx + 1 >= len(input_list):
+            redirect_idx, output_file = parse_stdout_redirect(input_list[1:])
+            if redirect_idx is not None:
+                if not output_file:
                     sys.stdout.write("echo: missing output file\n")
                     continue
-                output_file = input_list[redirect_idx + 1]
-                echo_args = input_list[1:redirect_idx]
+                echo_args = input_list[1:1 + redirect_idx]
                 with open(output_file, "w") as file:
                     subprocess.run(["echo", *echo_args], stdout=file, text=True)    
                 continue
@@ -95,13 +106,12 @@ def main():
         ## check if path exists and is executable
 
         if input_list[0] == "ls":
-            if ">" in input_list:
-                redirect_idx = input_list.index(">")
-                if redirect_idx + 1 >= len(input_list):
+            redirect_idx, output_file = parse_stdout_redirect(input_list[1:])
+            if redirect_idx is not None:
+                if not output_file:
                     sys.stdout.write("ls: missing output file\n")
                     continue
-                output_file = input_list[redirect_idx + 1]
-                ls_args = input_list[1:redirect_idx]
+                ls_args = input_list[1:1 + redirect_idx]
                 with open(output_file, "w") as file:
                     subprocess.run(["ls", *ls_args], stdout=file, text=True)
                 continue
